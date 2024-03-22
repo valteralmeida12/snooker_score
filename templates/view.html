@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scoreboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Background color */
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #scoreboard {
+            background-color: #f0f0f0; /* Scoreboard background color */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+        }
+
+        .player {
+            text-align: center;
+        }
+
+        .player .name {
+            font-weight: bold;
+        }
+
+        .games-won {
+            font-size: 14px;
+        }
+
+        .score {
+            font-size: 24px;
+        }
+
+        .login-button {
+            margin-top: 0px; /* Adjust the margin to move the button down */
+            display: block; /* Make the button a block-level element */
+            width: 10%; /* Make the button full width */
+            padding: 5px 10px;
+            background-color: transparent; /* Button color */
+            color: transparent;
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3; /* Button color on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <button class="login-button" onclick="window.location.href='/login'">Login</button>
+    <div id="scoreboard">
+        <!-- Scoreboard content will be updated dynamically -->
+    </div>
+    <script>
+        function updateScoreboard() {
+            fetch('/scoreboard_data')
+            .then(response => response.json())
+            .then(data => {
+                // Update the scoreboard content with the fetched data
+                document.getElementById('scoreboard').innerHTML = `
+                    <div class="player">
+                        <div class="name">${data.player1.name}</div>
+                        <div class="games-won">(${data.player1.games_won})</div>
+                        <div class="score">${data.player1.score}</div>
+                    </div>
+                    <div class="hyphen">-</div>
+                    <div class="player">
+                        <div class="name">${data.player2.name}</div>
+                        <div class="games-won">(${data.player2.games_won})</div>
+                        <div class="score">${data.player2.score}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // Update scoreboard initially
+        updateScoreboard();
+
+        // Update scoreboard every 5 seconds (adjust interval as needed)
+        setInterval(updateScoreboard, 1000);
+    </script>
+</body>
+</html>

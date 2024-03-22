@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit Page</h1>
+    <form action="{{ url_for('update_info') }}" method="post">
+        <label for="player1_name">Player 1 Name:</label>
+        <input type="text" id="player1_name" name="player1_name" value="{{ scoreboard['player1']['name'] }}"><br><br>
+        <label for="player1_games_won">Player 1 Games Won:</label>
+        <input type="number" id="player1_games_won" name="player1_games_won" value="{{ scoreboard['player1']['games_won'] }}"><br><br>
+        <label for="player1_score">Player 1 Score:</label>
+        <input type="number" id="player1_score" name="player1_score" value="{{ scoreboard['player1']['score'] }}"><br><br>
+
+        <label for="player2_name">Player 2 Name:</label>
+        <input type="text" id="player2_name" name="player2_name" value="{{ scoreboard['player2']['name'] }}"><br><br>
+        <label for="player2_games_won">Player 2 Games Won:</label>
+        <input type="number" id="player2_games_won" name="player2_games_won" value="{{ scoreboard['player2']['games_won'] }}"><br><br>
+        <label for="player2_score">Player 2 Score:</label>
+        <input type="number" id="player2_score" name="player2_score" value="{{ scoreboard['player2']['score'] }}"><br><br>
+
+        <input type="submit" value="Update Info">
+    </form>
+    <form action="{{ url_for('logout') }}" method="get">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
+
+
+
